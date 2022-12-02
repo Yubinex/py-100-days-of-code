@@ -1,64 +1,8 @@
 import random
+from ascii_art import stages, logo
+from words import word_list
 
 
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\\  |
- / \\  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
-
-word_list = ["ardvark", "baboon", "camel"]
 chosen_word = random.choice(word_list)
 print(f"Pssst, the solution is {chosen_word}")
 
@@ -67,11 +11,12 @@ word_length = len(chosen_word)
 
 lives = 6
 flag = False
-print(''.join(display))
-print(stages[lives])
+print(logo)
 while not flag:
     print(f"Lives: {lives}")
     guess = input("Guess a letter: ").lower()
+    if guess in display:
+        print(f"You've already guessed {guess}!")
     for index in range(word_length):
         letter = chosen_word[index]
         if letter == guess:
