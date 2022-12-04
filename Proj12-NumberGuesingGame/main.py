@@ -3,7 +3,7 @@ from art import logo
 
 
 def get_random_number():
-    return random.randint(1, 101)
+    return random.randint(1, 100)
 
 
 def run_game():
