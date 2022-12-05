@@ -3,6 +3,7 @@ from art import logo, vs
 import random
 import os
 import platform
+import sys
 
 # implement clear() function
 PLATFORM = platform.system()
@@ -21,7 +22,11 @@ def get_random_data():
 
 
 def get_display_string(data, char):
-    return f"Compare {char}: {data['name']}, a {data['description']}, from {data['country']}."
+    string = f"{data['name']}, a {data['description']}, from {data['country']}"
+    if char == 'A':
+        return f"Compare A: {string}."
+    else:
+        return f"Against B: {string}."
 
 
 def check_guess(followers_a, followers_b, user_guess):
@@ -65,5 +70,6 @@ def run():
     while input("Play again? y/n ").lower() == "y":
         run()
     print("Program finished...")
+    sys.exit()  #? Don't know if this is needed...
     
 run()
