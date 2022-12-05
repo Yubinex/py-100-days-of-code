@@ -50,7 +50,6 @@ def run():
         data_a = get_random_data()
         data_b = get_random_data()
         while data_a == data_b:
-            data_a = get_random_data()
             data_b = get_random_data()
 
         print(get_display_string(data=data_a, char='A'))
