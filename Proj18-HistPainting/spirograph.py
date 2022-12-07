@@ -23,6 +23,7 @@ def draw_spirograph_example_solution(size_of_gap):
 
 
 draw_spirograph(200)
+draw_spirograph(150)
 draw_spirograph_example_solution(5)
 
 screen = t.Screen()
