@@ -18,12 +18,9 @@ while len(guessed_states) < 50:
         title=f"{score}/{len(state_names)} States Correct", prompt="Enter a State's name:")).strip().title()
 
     if answer_state == "Exit":
-        states_to_learn_list = []
-        for state in state_names:
-            if state not in guessed_states:
-                states_to_learn_list.append(state)
-        data = pd.DataFrame(states_to_learn_list)
-        data.to_csv("Proj24-US_States/states_to_learn.csv")
+        missing_states = [state for state in state_names if state not in guessed_states]
+        data = pd.DataFrame(missing_states)
+        data.to_csv("Proj25-NATO_Alphabet/states_to_learn.csv")
         break
 
     if answer_state in state_names:
