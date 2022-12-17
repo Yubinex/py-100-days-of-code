@@ -2,6 +2,9 @@ import requests
 import datetime as dt
 import smtplib
 
+# script version
+VERSION = 1.1
+
 # date constants
 TODAY_DATE = dt.date.today()
 YESTERDAY_DATE = TODAY_DATE - dt.timedelta(days=1)
@@ -26,8 +29,8 @@ with open(file="Proj35-StockTradingNewsAlert/email_password.txt") as email_passw
 # TODO: Load recipients in text file
 RECIPIENTS = [
     "janhauck99@gmail.com",
-    #"uwehauck@gmail.com",
-    #"sibylle@familie-hauck.de",
+    "uwehauck@gmail.com",
+    "sibylle@familie-hauck.de",
 ]
 
 # getting data from stock api
@@ -44,9 +47,13 @@ stock_data_list = [value for (key, value) in stock_data.items()][1]
 
 # get yesterday's closing price
 yesterday_data = stock_data_list[0]
+yesterday_high = yesterday_data["high"]
+yesterday_low = yesterday_data["low"]
 yesterday_closing = yesterday_data["close"]
 # get before yesterday's closing price
 before_yesterday_data = stock_data_list[1]
+before_yesterday_high = before_yesterday_data["high"]
+before_yesterday_low = before_yesterday_data["low"]
 before_yesterday_closing = before_yesterday_data["close"]
 # get the difference between the two days
 pos_diff = abs(yesterday_closing - before_yesterday_closing)
@@ -83,7 +90,20 @@ if diff_percent > 3:
     mail_subject = f"Subject:{COMPANY_NAME} [{STOCK_NAME}] {difference}\n\n"
     mail_content = f"""
 Exact difference: {difference_detail}
+
+Stock Information:
+
+HIGHEST:
+    [{BEFORE_YESTERDAY_DATE}] - ${round(before_yesterday_high, 2)}
+    [{YESTERDAY_DATE}] - ${round(yesterday_high, 2)}
+
+LOWEST:
+    [{BEFORE_YESTERDAY_DATE}] - ${round(before_yesterday_low, 2)}
+    [{YESTERDAY_DATE}] - ${round(yesterday_low, 2)}
     
+CLOSING:
+    [{BEFORE_YESTERDAY_DATE}] - ${round(before_yesterday_closing, 2)}
+    [{YESTERDAY_DATE}] - ${round(yesterday_closing, 2)}
     
 '{COMPANY_NAME}' Top 3 News Articles [{TODAY_DATE}]
 
@@ -113,6 +133,9 @@ Article Description:
 {news_data_list[2].get("description")}
 
 Link to article: {news_data_list[2].get("url")}
+
+
+@yubinex - automatically generated email via StockTradingNewsAlert(v{VERSION})
 """
     mail = mail_subject + mail_content
 
