@@ -130,3 +130,8 @@ dmypy.json
 
 # Visual Studio Code
 .vscode
+
+# API Key and Password .txt files
+email_password.txt
+news_api_key.txt
+stock_api_key.txt
