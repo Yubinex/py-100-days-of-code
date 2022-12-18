@@ -135,3 +135,4 @@ dmypy.json
 email_password.txt
 news_api_key.txt
 stock_api_key.txt
+token.txt
