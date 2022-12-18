@@ -6,7 +6,10 @@ import smtplib
 VERSION = 1.1
 
 # date constants
-TODAY_DATE = dt.date.today()
+if dt.datetime.today().hour < 7:
+    TODAY_DATE = dt.date.today() - dt.timedelta(days=1)
+else:
+    TODAY_DATE = dt.date.today()
 YESTERDAY_DATE = TODAY_DATE - dt.timedelta(days=1)
 BEFORE_YESTERDAY_DATE = YESTERDAY_DATE - dt.timedelta(days=1)
 
@@ -26,11 +29,11 @@ MY_EMAIL = "yubinex.dev@gmail.com"
 with open(file="Proj35-StockTradingNewsAlert/email_password.txt") as email_passwd_file:
     PASSWORD = email_passwd_file.read()
 
-# TODO: Load recipients in text file
 RECIPIENTS = [
     "janhauck99@gmail.com",
-    "uwehauck@gmail.com",
-    "sibylle@familie-hauck.de",
+    #"uwehauck@gmail.com",
+    #"sibylle@familie-hauck.de",
+    #"marchauck04@gmail.com",
 ]
 
 # getting data from stock api
