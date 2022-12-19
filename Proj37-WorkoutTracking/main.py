@@ -27,9 +27,15 @@ parameters = {
 response_0 = requests.post(url=NUTRITIONIX_API_ENDPOINT, headers=headers, json=parameters)
 response_0.raise_for_status()
 data = response_0.json()
-print(data)
+
+with open("Proj37-WorkoutTracking/bearer.txt") as bearer_file:
+    BEARER_TOKEN = bearer_file.read()
 
 for exercise in data.get("exercises"):
+    sheety_headers = {
+        "Authorization": f"Bearer {BEARER_TOKEN}",
+    }
+    
     workout = {
         "workout": {
             "date": today_date,
@@ -40,5 +46,5 @@ for exercise in data.get("exercises"):
         },
     }
 
-    response_1 = requests.post(url=SHEETY_API_ENDPOINT, json=workout)
+    response_1 = requests.post(url=SHEETY_API_ENDPOINT, headers=sheety_headers, json=workout)
     response_1.raise_for_status()
