@@ -139,3 +139,5 @@ token.txt
 api_key.txt
 app_id.txt
 bearer.txt
+secret.txt
+cache_token.txt
