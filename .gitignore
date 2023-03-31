@@ -131,6 +131,9 @@ dmypy.json
 # Visual Studio Code
 .vscode
 
+# JetBrains
+.idea
+
 # API Key and Password .txt files
 email_password.txt
 news_api_key.txt
